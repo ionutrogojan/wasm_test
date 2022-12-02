@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wasm test</title>
+</head>
+<body>
+    <p>The text of greet is: <span id="greeting"></span></p>
+    <p>The sum of add is: <span id="adding"></span></p>
+    <p>The sum of subtract is: <span id="subtracting"></span></p>
+    <script type="module">
+        // html elements
+        const greeting = document.querySelector("#greeting");
+        const adding = document.querySelector("#adding");
+        const subtracting = document.querySelector("#subtracting");
+        // wasm import
+        import init, { add, subtract, greet } from "./pkg/wasm_test.js";
+        init().then(() => {
+            // update elements
+            greeting.innerText = greet("Jane");
+            adding.innerText = add(2, 2);
+            subtracting.innerText = subtract(12, 2);
+        });
+    </script>
+</body>
+</html>
